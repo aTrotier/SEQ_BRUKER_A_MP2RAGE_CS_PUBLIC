@@ -32,7 +32,7 @@ Sequence has been developped for Paravision **PV6.0.1**. Minor modification are 
 
 **Installation step :**
 
-* Copy the binary sequence under the folder 
+* Copy the binary sequence under the folder
   `/opt/PV6.0.1/share/`
 
 * To install : `File -> Import -> Binary Method ` and select the sequence in the share folder.
@@ -46,7 +46,7 @@ Region : AnyRegion
 Application : UserMethods
 ```
 
-To use it drag and drop to an exam card. 
+To use it drag and drop to an exam card.
 
 ## Acquisition
 
@@ -67,12 +67,12 @@ We will only described the MP2RAGE specific parameters. The other ones are stand
   * **Acceleration Type** :
 
     * **Fully** : no acceleration, all k-space is encoded (if the **Echo Train is equal to the ky matrix size. The image will be directly reconstructed under Bruker)
-    * **Grappa** (WIP -> supposed to work, just check the mask to be sure) 
-    * **Compressed sensing** : 
+    * **Grappa** (WIP -> supposed to work, just check the mask to be sure)
+    * **Compressed sensing** :
       * **Mask_With_File** : *deprecated* (if you need to use your own mask contact us)
       * **Mask_With_algorithm** : if you change any parameters don't forget to click on **CalcMask**
 
-    > Both Grappa and Compressed use **Acceleration CS Y/Z** so choose your acceleration and click on **CalcMask**. It indicates the total acceleration **Acceleration Totale** (French :D). 
+    > Both Grappa and Compressed use **Acceleration CS Y/Z** so choose your acceleration and click on **CalcMask**. It indicates the total acceleration **Acceleration Totale** (French :D).
     >
     > **Size of center mask** indicates the size of the squared fully sampled central part of the k-space (Used later for coil sensitivity calibration)
     >
@@ -80,7 +80,7 @@ We will only described the MP2RAGE specific parameters. The other ones are stand
 
     **AGAIN : Don't forget to click on CalcMask**
 
-* Contrast tab / Sel IR : You can change the inversion pulse parameters 
+* Contrast tab / Sel IR : You can change the inversion pulse parameters
 
   * Usually we use a sech of 10 ms with a slab Thickness of 200%
 
@@ -92,14 +92,14 @@ We will only described the MP2RAGE specific parameters. The other ones are stand
 
 ## Recontruction
 
-**Requirements :** 
+**Requirements :**
 
 * Matlab (tested on version > 2016b
 * [BART toolbox](https://mrirecon.github.io/bart/) (Tested for BART 0.5).
 
 Before launching any script add bart to your matlab path (launch the startup.m file in the bart folder).
 
-To perform the offline recontruction : 
+To perform the offline recontruction :
 
 * Download the bruker dataset located in `/opt/PV6.0.1/data/{USER}/`
 
@@ -128,7 +128,7 @@ To perform the offline recontruction :
     * LookupTable
   * The reconstruction data are stored in matlab structure (here called **s_out**) which include
     * **T1map**
-    * **MP2RAGE_mask** : MP2RAGE image modified with a filter that nulls the salt and-pepper background 
+    * **MP2RAGE_mask** : MP2RAGE image modified with a filter that nulls the salt and-pepper background
     * **imTI** : Ti1 and Ti2 images obtained after the CS reconstruction
     * **LUT** : structure that stores the parameters and image used to create the T1map
     * **param_in** are also store
@@ -136,6 +136,6 @@ To perform the offline recontruction :
 ## SIMULATION
 
 * opti_reco : **documentation todo**
-* opti_acq : 
+* opti_acq :
   * **simu_lut_MP2RAGE.m** : plot the lookuptable (important to check the range of T1 value measurable)
   * **opti_CNR** : set 2 T1 tissues at the beginning of the script. It will determined what is the best parameters to choose to get the highest CNR. It takes into account the acquisition time (divide by sqrt(**MP2RAGE_TR**) and/or sqrt(**Echo train**))
