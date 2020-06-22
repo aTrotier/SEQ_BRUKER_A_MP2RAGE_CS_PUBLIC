@@ -15,7 +15,6 @@ If you want the source code, send a request to : <aurelien.trotier@rmsb.u-bordea
 * [Acquisition](#Acquisition)
 * [Reconstruction](#Reconstruction)
 * [Simulation](#Simulation)
-* [NNotes](#Sequence installation)
 
 ## Folder structure
 
