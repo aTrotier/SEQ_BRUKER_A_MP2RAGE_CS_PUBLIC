@@ -15,11 +15,10 @@ If you want the source code, send a request to : <aurelien.trotier@rmsb.u-bordea
 * [Acquisition](#Acquisition)
 * [Reconstruction](#Reconstruction)
 * [Simulation](#Simulation)
-* [NNotes](#Sequence installation)
 
 ## Folder structure
 
-* **a_MP2RAGE_CS** : Includes the file to install the sequence on Bruker scanner (PV6.0.1).
+* **SEQ** : Binary the sequence on Bruker scanner (PV6.0.1).
 * **reco-a_MP2RAGE_cs** : Matlab script for reconstruction
   * **script_T1MAP_MP2RAGE.m** is the main script to reconstruct the T1 maps
   * **simu folder** : regroup script to find optimal parameters for acquisition and reconstruction
@@ -33,22 +32,10 @@ Sequence has been developped for Paravision **PV6.0.1**. Minor modification are 
 
 **Installation step :**
 
-* Copy the folder **a_MP2RAGE_CS** to the location (Change the {USER} by your user name) : 
-  `/opt/PV6.0.1/prog/curdir/{USER}/Paravision/methods/src/`
+* Copy the binary sequence under the folder 
+  `/opt/PV6.0.1/share/`
 
-* In the Paravision Workspace Explorer go to : `Method Development/User Methods ({USER})`
-
-  * right-click on the sequence a_MP2RAGE_CS
-  * Build/install
-  * Let all the build options selected -> OK
-  * You should see these last lines in popup window **output** :
-
-  ```
-  Link a_MP2RAGE_CS.so
-  Install /opt/PV6.0.1/prog/curdir/{USER}/Paravision/methods/a_MP2RAGE_CS.so
-  Install /opt/PV6.0.1/prog/curdir/{USER}/Paravision/methods/a_MP2RAGE_CS.xml
-  ```
-
+* To install : `File -> Import -> Binary Method ` and select the sequence in the share folder.
 
 
 Sequence is now install and available under the **Palette** tab/Explorer tab/Scan Programs & Protocols :
@@ -58,8 +45,6 @@ Object : AnyObject
 Region : AnyRegion
 Application : UserMethods
 ```
-
-
 
 To use it drag and drop to an exam card. 
 
