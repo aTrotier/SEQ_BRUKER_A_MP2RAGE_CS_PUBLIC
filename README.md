@@ -32,22 +32,8 @@ Sequence has been developped for Paravision **PV6.0.1**. Minor modification are 
 
 **Installation step :**
 
-* Copy the folder **a_MP2RAGE_CS** to the location (Change the {USER} by your user name) : 
-  `/opt/PV6.0.1/prog/curdir/{USER}/Paravision/methods/src/`
-
-* In the Paravision Workspace Explorer go to : `Method Development/User Methods ({USER})`
-
-  * right-click on the sequence a_MP2RAGE_CS
-  * Build/install
-  * Let all the build options selected -> OK
-  * You should see these last lines in popup window **output** :
-
-  ```
-  Link a_MP2RAGE_CS.so
-  Install /opt/PV6.0.1/prog/curdir/{USER}/Paravision/methods/a_MP2RAGE_CS.so
-  Install /opt/PV6.0.1/prog/curdir/{USER}/Paravision/methods/a_MP2RAGE_CS.xml
-  ```
-
+* Copy the folder files in the **methods** folder to the location (Change the {USER} by your user name) : 
+  `/opt/PV6.0.1/prog/curdir/{USER}/Paravision/methods/`
 
 
 Sequence is now install and available under the **Palette** tab/Explorer tab/Scan Programs & Protocols :
@@ -57,8 +43,6 @@ Object : AnyObject
 Region : AnyRegion
 Application : UserMethods
 ```
-
-
 
 To use it drag and drop to an exam card. 
 
