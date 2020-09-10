@@ -104,7 +104,7 @@ for tv = 1:length(s_in.TVlist)
     end
 end
 
-s_out.sens_bart = sens_barts;
+s_out.sens_bart = sens_bart;
 
 s_out.im_fft = im_fft;
 s_out.im_zf = im_zf;
