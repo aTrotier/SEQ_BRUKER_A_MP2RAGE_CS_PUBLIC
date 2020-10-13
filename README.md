@@ -2,19 +2,23 @@
 
 This repository regroups the compiled sequence and matlab reconstruction of the MP2RAGE+CS sequence. This repository is still in **beta** don't hesitate to open a issue and share your comments.
 
+
+
 Sequence principle is described in this MRM publication :  [![DOI](https://zenodo.org/badge/DOI/10.1002/mrm.27438.svg)](https://doi.org/10.1002/mrm.27438)
 
-If you want the source code, send a request to : <aurelien.trotier@rmsb.u-bordeaux.fr>
+**Source code is available as a private [submodule](https://github.com/aTrotier/SEQ_BRUKER_A_MP2RAGE_CS_PUBLIC)** if you want the source code, send a request to : <aurelien.trotier@rmsb.u-bordeaux.fr>
 
 
 
 ## Plan
 
-* [Folder structure](#Folder-structure)
-* [Sequence installation](#Sequence-installation)
-* [Acquisition](#Acquisition)
-* [Reconstruction](#Reconstruction)
-* [Simulation](#Simulation)
+- [Bruker Sequence : MP2RAGE + Compressed Sensing acceleration](#bruker-sequence--mp2rage--compressed-sensing-acceleration)
+  - [Plan](#plan)
+  - [Folder structure](#folder-structure)
+  - [Sequence installation](#sequence-installation)
+  - [Acquisition](#acquisition)
+  - [Recontruction](#recontruction)
+  - [SIMULATION](#simulation)
 
 ## Folder structure
 
