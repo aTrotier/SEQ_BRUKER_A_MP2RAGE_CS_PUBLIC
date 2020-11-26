@@ -125,10 +125,10 @@ if s_in.GPU
     warning('GPU is used : if reconstruction failder try with GPU = 0');
     
     sens_bart = bart(sprintf('ecalib -g -S -c0.1 -r %d -m %d',calibsz,s_in.SENS_MAPS), kdata_bart(:,:,:,:,:,2,1)); % second TI and first rep is used
-    imCS = bart(sprintf('pics -d5 -g -U -i%d -e -R W:7:0:%d -R T:7:0:%d',s_in.ITER,s_in.W_LAMBDA,s_in.TV_LAMBDA),  kdata_bart , sens_bart);
+    imCS = bart(sprintf('pics -d5 -S -g -U -i%d -e -R W:7:0:%d -R T:7:0:%d',s_in.ITER,s_in.W_LAMBDA,s_in.TV_LAMBDA),  kdata_bart , sens_bart);
 else
     sens_bart = bart(sprintf('ecalib -S -c0.1 -r %d -m %d',calibsz,s_in.SENS_MAPS), kdata_bart(:,:,:,:,:,2,1)); % second TI and first rep is used
-    imCS = bart(sprintf('pics -d5 -U -i%d -e -R W:7:0:%d -R T:7:0:%d',s_in.ITER,s_in.W_LAMBDA,s_in.TV_LAMBDA),  kdata_bart , sens_bart);
+    imCS = bart(sprintf('pics -d5 -S -U -i%d -e -R W:7:0:%d -R T:7:0:%d',s_in.ITER,s_in.W_LAMBDA,s_in.TV_LAMBDA),  kdata_bart , sens_bart);
 end
 
 if strcmp(s_in.OPTION_RECO,'IM_AVERAGE')
