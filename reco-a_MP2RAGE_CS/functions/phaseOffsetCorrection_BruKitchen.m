@@ -1,7 +1,7 @@
 %
 % imOut=phaseOffsetCorrection()
 %
-% Author:   Aurélien TROTIER  (a.trotier@gmail.com)
+% Author:   Aurï¿½lien TROTIER  (a.trotier@gmail.com)
 % Date:     2016-06-22
 % Partner: none
 % Institute: CRMSB (Bordeaux)
@@ -37,7 +37,7 @@ if strcmp(PVM_SpatDimEnum,'3D')
     phaseOffz=zeros(sx,sy,sz);
     
     for k=1:sz
-        phaseOffz(:,:,k)=ones(sx,sy)*(k-sz/2+1)/sz*sz*bruk.method.PVM_SPackArrSliceOffset/bruk.method.PVM_Fov(3);
+        phaseOffz(:,:,k)=ones(sx,sy)*(k-sz/2+1)/sz*sz*-bruk.method.PVM_SPackArrSliceOffset/bruk.method.PVM_Fov(3);
     end
 else
     sz=1;
