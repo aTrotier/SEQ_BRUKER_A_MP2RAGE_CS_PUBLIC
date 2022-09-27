@@ -27,7 +27,7 @@ b=MRIReco.BrukerFile(path_fid)
 
 # Reconstruction of a_MP2RAD
 include("../utils_a_MP2RAGE_CS.jl");
-Isense,MP2_sense,T1map = recoMP2RAGE_CS(b)
+Isense,MP2_sense,T1map,_ = recoMP2RAGE_CS(b)
 
 
 ## Write back data in Bruker format
