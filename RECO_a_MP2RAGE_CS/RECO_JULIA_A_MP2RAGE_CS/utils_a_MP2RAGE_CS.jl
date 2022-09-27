@@ -15,7 +15,7 @@ function recoMP2RAGE_CS(b::BrukerFile;λ=3.e-2,forceCS = false)
 
     else
         @info "Fista reconstruction"
-        kspace = extract3DKSpace_2(acq);
+        kspace = extract3DKSpace(acq);
 
         calibSize = parse.(Int,b["CenterMaskSize"])
         calibData = crop(kspace[:,:,:,2,:],(calibSize,calibSize,calibSize))
