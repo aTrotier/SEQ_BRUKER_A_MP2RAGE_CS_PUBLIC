@@ -1,0 +1,16 @@
+#!/bin/bash
+# the next line restarts using wish\
+
+
+user=`echo $USER`
+echo $user
+
+Path="$1"
+echo $Path
+
+export LD_LIBRARY_PATH=/lib
+exec /opt/PV6.0.1/share/julia-1.8.0/bin/julia  --project=/opt/PV6.0.1/share/RECO_A_MP2RAGE_CS  -t auto /opt/PV6.0.1/share/RECO_A_MP2RAGE_CS/macro/julia_a_MP2RAGE_CS.jl $Path
+
+echo "Julia script is terminated"
+
+exit 0;
