@@ -1,9 +1,9 @@
-function recoMP2RAGE_CS(b::BrukerFile;λ=3.e-2,forceCS = false)
+function recoMP2RAGE_CS(b::BrukerFile;λ=0.01,iteration=30, zeroFilled = false)
 
     raw = RawAcquisitionData_MP2RAGE_CS(b);
     acq = AcquisitionData(raw,OffsetBruker = true);
 
-    if b["EnableCS"] == "Fully" && ~forceCS
+    if b["EnableCS"] == "Fully" || zeroFilled
         @info "FFT reconstruction"
         params = Dict{Symbol, Any}()
         params[:reco] = "direct"
@@ -14,35 +14,35 @@ function recoMP2RAGE_CS(b::BrukerFile;λ=3.e-2,forceCS = false)
         Icomb = sum(conj.(sens).*Ireco,dims=5) ./sum(abs.(sens).^2,dims = 5)
 
     else
-        @info "Fista reconstruction"
+        @info "CS reconstruction"
         kspace = extract3DKSpace(acq);
 
         calibSize = parse.(Int,b["CenterMaskSize"])
         calibData = crop(kspace[:,:,:,2,:],(calibSize,calibSize,calibSize))
         kspace = Nothing # clear data
         sensSize = (acq.encodingSize[1],acq.encodingSize[2],acq.encodingSize[3]) # (size(kspace,1),size(kspace,2),size(kspace,3))
-        sens_spirit = espirit(calibData,sensSize ,(6,6,6),eigThresh_2 = 0); # really long on my mac
+        sens = espirit(calibData,sensSize ,(6,6,6),eigThresh_2 = 0); # really long on my mac
 
-        sens_spirit = reshape(sens_spirit,acq.encodingSize[1],acq.encodingSize[2],acq.encodingSize[3],:);
+        sens = reshape(sens,acq.encodingSize[1],acq.encodingSize[2],acq.encodingSize[3],:);
 
         # CS reco
-        T = eltype(real(sens_spirit[1]))
-        params2 = Dict{Symbol, Any}()
-        params2[:reco] = "multiCoil"
-        params2[:reconSize] = sensSize
-        params2[:senseMaps] = sens_spirit;
+        T = eltype(real(sens[1]))
+        params = Dict{Symbol, Any}()
+        params[:reco] = "multiCoil"
+        params[:reconSize] = sensSize
+        params[:senseMaps] = sens;
 
-        params2[:solver] = "fista"
-        params2[:sparseTrafoName] = "Wavelet"
-        params2[:regularization] = "L1"
-        params2[:λ] = T(λ) # 5.e-2
-        params2[:iterations] = 60
-        params2[:normalize_ρ] = true
-        params2[:ρ] = T(0.95)
-        #params2[:relTol] = 0.1
-        params2[:normalizeReg] = true
+        params[:solver] = "admm"
+        params[:sparseTrafoName] = "Wavelet"
+        params[:regularization] = "L1"
+        params[:λ] = T(λ) # 5.e-2
+        params[:iterations] = iteration
+        params[:normalize_ρ] = true
+        params[:ρ] = T(0.95)
+        params[:relTol] = 0.1
+        params[:normalizeReg] = true
 
-        I_wav = reconstruction(acq, params2);
+        I_wav = reconstruction(acq, params);
         Icomb = I_wav.data
     end
 
@@ -60,7 +60,7 @@ function recoMP2RAGE_CS(b::BrukerFile;λ=3.e-2,forceCS = false)
     params_MP2 = ParamsMP2RAGE(TI₁,TI₂,TR,MP2RAGE_TR,ETL,α₁,α₂)
     T1map, = mp2rage_T1maps(MP2,params_MP2)
 
-    return Icomb,MP2,T1map,acq
+    return Icomb,MP2,T1map,sens,acq
 end
 
 

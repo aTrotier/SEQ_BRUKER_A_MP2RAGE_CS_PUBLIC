@@ -5,8 +5,9 @@ using MRIReco
 using qMRI
 include("utils_a_MP2RAGE_CS.jl")
 
-b = BrukerFile("data/20220927_091210_AT_MP2RAGE_JULIA_04_1_1/3")
-Ireco,MP2,T1map,acq = recoMP2RAGE_CS(b,forceCS = true)
+b = BrukerFile("data/20220930_144024_AT_MP2RAGE_JULIA_05_1_1/5")
+
+Ireco,MP2,T1map,acq,sens = recoMP2RAGE_CS(b, λ=0.1,iteration=30,zeroFilled = false)
 
 # write NIFTI
 T1map = reshape(T1map,collect(size(T1map))...,1,1)
