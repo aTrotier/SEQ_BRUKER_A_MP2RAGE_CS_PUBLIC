@@ -33,6 +33,11 @@ Isense,MP2_sense,T1map,_ = recoMP2RAGE_CS(b)
 ## Write back data in Bruker format
 include("utils_write_bruker.jl");
 
+Isense = abs.(Isense)
+Isense[isnan.(Isense)] .= 0
+MP2_sense[isnan.(MP2_sense)] .= 0
+T1map[isnan.(T1map)] .= 0
+
 image_4D = zeros(Float64,size(MP2_sense,1),size(MP2_sense,2),size(MP2_sense,3),4);
 image_4D[:,:,:,1:2]=abs.(Isense[:,:,:,1:2])
 image_4D[:,:,:,3]=MP2_sense;
