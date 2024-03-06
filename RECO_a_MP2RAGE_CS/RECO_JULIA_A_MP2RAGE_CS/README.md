@@ -1,48 +1,99 @@
 # Reconstruction of MP2RAGE acquisition with Julia
+Reconstruction was performed Online and Offline. The Online version is not maintained anymore (I do not have access to a scanner with Centos 7 but if needed I can help you with that.
+
+Only an offline reconstruction that send back a nifti file is working using a Pluto notebook.
 
 # Information about Julia
 
-## Install Julia
-- Download and install Julia : https://julialang.org/downloads/
+## Julia Installation
 
-The generic Linux and FreeBSD binaries do not require any special installation steps, but you will need to ensure that your system can find the julia executable. The directory where Julia is installed is referred to as <Julia directory>.
+To use the code, we recommend downloading Julia version 1.9.3 with `juliaup`.
 
-To run Julia, you can do any of the following:
-- Invoke the julia executable by using its full path: <Julia directory>/bin/julia
-- Create a symbolic link to julia inside a folder which is on your system PATH
-- Add Julia's bin folder (with full path) to your system PATH environment variable
+<details>
+<summary>Windows</summary>
 
-To add Julia's bin folder (with full path) to PATH environment variable, you can edit the ~/.bashrc (or ~/.bash_profile) file. Open the file in your favourite editor and add a new line as follows:
-
-```bash
-export PATH="$PATH:/path/to/<Julia directory>/bin"
+#### 1. Install juliaup
+```
+winget install julia -s msstore
+```
+#### 2. Add Julia 1.9.3
+```
+juliaup add 1.9.3
+```
+#### 3. Make 1.9.3 default
+```
+juliaup default 1.9.3
 ```
 
-## Launch Julia
-Type `julia` in your terminal. The most important options you can add are :
-- `-t auto` or `-t N` où N est le nombre de threads que vous voulez utiliser
-- `--project PATH` let julia read the project and manifest in the directory **PATH**
+<!---#### Alternative
+Alternatively you can download [this installer](https://julialang-s3.julialang.org/bin/winnt/x64/1.7/julia-1.9.3-win64.exe).--->
 
-# Reconstruction
-The reconstruction can be performed either directly on the Bruker scanner by calling a macro. The results will be available in a 2dseq files and can be seen directly in Paravision.
-Or you can reconstruct offline the data and write directly the nifti (without any information about the FOV position etc)
+</details>
 
-Two packages are required :
-- `MRIReco` : read bruker files and perform advanced reconstruction
-- `qMRI` : process the image and create T1 maps
 
-Some functions are also requires and stores in 2 files :
-- `utils_a_MP2RAGE_CS.jl` : Reorder the fid data according to the Compressed Sensing sampling patterns. Additionnal functions to extract the kspace and crop the center.
-- `utils_write_bruker.jl` : write the resulting image in the 2dseq files and edit the `VISU_PARS`
+<details>
+<summary>Mac</summary>
 
-## Offline reconstruction
-In order to perform an offline reconstruction (without writing to the 2dseq folder) use the `main.jl` script.
-Just edit the path to your experiment :
-```julia
-b = BrukerFile(PATH)
+#### 1. Install juliaup
+```
+curl -fsSL https://install.julialang.org | sh
+```
+You may need to run `source ~/.bashrc` or `source ~/.bash_profile` or `source ~/.zshrc` if `juliaup` is not found after installation.
+
+Alternatively, if `brew` is available on the system you can install juliaup with
+```
+brew install juliaup
+```
+#### 2. Add Julia 1.9.3
+```
+juliaup add 1.9.3
+```
+#### 3. Make 1.9.3 default
+```
+juliaup default 1.9.3
 ```
 
-If you want to write the file to nifti you can run the 3 last lines.
+<!---#### Alternative
+Alternatively you can download [this installer](https://julialang-s3.julialang.org/bin/mac/x64/1.7/julia-1.9.3-mac64.dmg)--->
 
+</details>
 
+<details>
+<summary>Linux</summary>
 
+#### 1. Install juliaup
+
+```
+curl -fsSL https://install.julialang.org | sh
+```
+You may need to run `source ~/.bashrc` or `source ~/.bash_profile` or `source ~/.zshrc` if `juliaup` is not found after installation.
+
+Alternatively, use the AUR if you are on Arch Linux or `zypper` if you are on openSUSE Tumbleweed.
+#### 2. Add Julia 1.9.3
+```
+juliaup add 1.9.3
+```
+#### 3. Make 1.9.3 default
+```
+juliaup default 1.9.3
+```
+</details>
+
+# Offline reconstruction : output nifti files
+
+The reconstruction can be performed with a pluto notebook. 
+
+## We first need to install Pluto.
+- launch julia : `julia -t auto`
+- type `]`, the prompt should turn blue (rather than green)
+- type `add Pluto`
+- close the terminal
+
+## Run the notebook
+- open a terminal
+- `julia -t auto`
+- `using Pluto`
+- `Pluto.run()` should open a page in your web browser
+- Open the `notebook_MP2RAGE.jl` files (it should open in safemode)
+- Edit the specific paths (bruker, nifti output)
+- run it :)

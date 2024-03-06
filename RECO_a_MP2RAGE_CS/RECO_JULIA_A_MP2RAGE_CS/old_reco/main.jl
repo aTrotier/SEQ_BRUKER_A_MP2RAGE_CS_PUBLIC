@@ -5,7 +5,7 @@ using MRIReco
 using qMRI
 include("utils_a_MP2RAGE_CS.jl")
 
-b = BrukerFile("data/20220930_144024_AT_MP2RAGE_JULIA_05_1_1/5")
+b = BrukerFile("/Users/aurelien/Documents/GitHub/SEQ_BRUKER_A_MP2RAGE_CS_PUBLIC/RECO_a_MP2RAGE_CS/RECO_JULIA_A_MP2RAGE_CS/data/8")
 
 Ireco,MP2,T1map,acq,sens = recoMP2RAGE_CS(b, λ=0.1,iteration=30,zeroFilled = false)
 
